@@ -30,24 +30,49 @@ LETTER_POOL = {
 }
 
 def draw_letters():
+    #empty list to hold available letters
     letter_pool = []
-    
+    #loop through letters
     for letter in LETTER_POOL:
+        #loop through however many times that letter is there
         for i in range(LETTER_POOL[letter]):
+            #add to list
             letter_pool.append(letter)
-
+    #empty list for player's 10 letters
     letters = []
 
+    #repeat 10 times
     for i in range(10):
+        #pick a random index
         random_index = randint(0, len(letter_pool) - 1)
+        #use that random index to get the letter at that position
         letter = letter_pool[random_index]
+        #add to players hand
         letters.append(letter)
+        #and remove from available pool
         letter_pool.remove(letter)
-
+    #return the player's 10-letter hand
     return letters
 
 def uses_available_letters(word, letter_bank):
-    pass
+    #make a copy of the letter bank
+    available_letters = letter_bank[:]
+    #convert the word to the same case
+    word = word.casefold()
+
+    #loop through each letter
+    for letter in word:
+        #convert to uppercase to match letter bank
+        letter = letter.upper()
+        #is letter available in bank
+        if letter in available_letters:
+            #remove
+            available_letters.remove(letter)
+        else:
+            return False
+    #after checking every letter in the word, then the word can be created
+    return True
+
 
 def score_word(word):
     pass
