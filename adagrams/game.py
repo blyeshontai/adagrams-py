@@ -124,4 +124,45 @@ def score_word(word):
     return score
 
 def get_highest_word_score(word_list):
-    pass
+    # First word in the list as current "best" word
+    best_word = word_list[0]
+
+    # Calculate the score of our starting word.
+    best_score = score_word(best_word)
+
+    # Look at each word in the list.
+    for word in word_list:
+
+        # Calculate the score of the current word.
+        current_score = score_word(word)
+
+        # If the current word has a HIGHER score than our
+        # current best word, it becomes the new best word.
+        if current_score > best_score:
+            best_word = word
+            best_score = current_score
+
+        # If the scores are the same
+        # tie-breaking rules.
+        elif current_score == best_score:
+
+            # First, check whether either word has 10 letters.
+            if len(word) == 10 and len(best_word) != 10:
+                best_word = word
+                best_score = current_score
+
+            # If the current word is NOT 10 letters, but the current best word IS 10 letters, keep current best word.
+            elif len(word) != 10 and len(best_word) == 10:
+                pass
+
+            # If neither word is 10 letters, the normal tie-breaker applies: choose the shorter word.
+            elif len(word) < len(best_word):
+                best_word = word
+                best_score = current_score
+
+            # If they have the same score AND same length, we do nothing.
+            elif len(word) == len(best_word):
+                pass
+
+    # Return a tuple containing: index 0 → the winning word index 1 → the winning word's score
+    return (best_word, best_score)
