@@ -89,14 +89,37 @@ def uses_available_letters(word, letter_bank):
 
 # ----- WAVE 3 -----
 '''
-
+returns an int representing the number of points based on letter point value sum
+if len(word) == 7, 8, 9, or 10. bonus 8 points.
 '''
 # return score of a word
 def score_word(word):
-    pass
+
+    # score chart provided as a hashmap
+    score_chart ={
+        "A": 1, "E": 1, "I": 1, "O": 1, "U": 1, "L": 1, "N": 1, "R": 1, "S": 1, "T": 1,
+        "D": 2, "G": 2,
+        "B": 3, "C": 3, "M": 3, "P": 3,
+        "F": 4, "H": 4, "V": 4, "W": 4, "Y": 4,
+        "K": 5,
+        "J": 8, "X": 8,
+        "Q": 10, "Z": 10}
+
+    # initialize num of points
+    num_of_points = 0
+    refined_word = word.upper()
+
+    if len(refined_word) == 7 or len(refined_word) == 8 or len(refined_word) == 9 or len(refined_word) == 10:
+        num_of_points += 8
+    else:
+        num_of_points += 0
+    for i in refined_word:
+            num_of_points += score_chart[i]
+
+    return(num_of_points)
+
 
 
 
 def get_highest_word_score(word_list):
     pass
-
