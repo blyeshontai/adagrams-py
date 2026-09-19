@@ -1,90 +1,14 @@
 from random import randint
 
 def draw_letters():
-    letter_pool = []
-
-    for letter in LETTER_POOL:
-        for i in range(LETTER_POOL[letter]):
-            letter_pool.append(letter)
-
-    letters = []
-
-    for i in range(10):
-        random_index = randint(0, len(letter_pool) - 1)
-        letter = letter_pool[random_index]
-        letters.append(letter)
-        letter_pool.remove(letter)
-
-    return letters
+    pass
 
 def uses_available_letters(word, letter_bank):
-    #make a copy of the letter bank
-    available_letters = letter_bank[:]
-    #convert the word to the same case
-    word = word.casefold()
-
-    #loop through each letter
-    for letter in word:
-        #convert to uppercase to match letter bank
-        letter = letter.upper()
-        #is letter available in bank
-        if letter in available_letters:
-            #remove
-            available_letters.remove(letter)
-        else:
-            return False
-    #after checking every letter in the word, then the word can be created
-    return True
+    pass
 
 
 def score_word(word):
-    #based on letter points value given in read me
-    #dictionary to store point value for each letter
-    letter_points = {
-        "A": 1,
-        "B": 3,
-        "C": 3,
-        "D": 2,
-        "E": 1,
-        "F": 4,
-        "G": 2,
-        "H": 4,
-        "I": 1,
-        "J": 8,
-        "K": 5,
-        "L": 1,
-        "M": 3,
-        "N": 1,
-        "O": 1,
-        "P": 3,
-        "Q": 10,
-        "R": 1,
-        "S": 1,
-        "T": 1,
-        "U": 1,
-        "V": 4,
-        "W": 4,
-        "X": 8,
-        "Y": 4,
-        "Z": 10
-    }
-
-    #starting score
-    score = 0
-
-    #convert to uppercase
-    word = word.upper()
-
-    #loop through each letter
-    for letter in word:
-        #get point value and add to score
-        score += letter_points[letter]
-
-    #if word has >= 7 letters add 8 point bonus
-    if len(word) >= 7:
-        score += 8
-
-    return score
+    pass
 
 def get_highest_word_score(word_list):
     pass
