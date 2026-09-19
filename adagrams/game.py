@@ -57,9 +57,6 @@ def draw_letters():
     return(hand)
 
 
-
-
-
 # ----- WAVE 2 -----
 '''
 Check if word given only uses chars from hand letter_bank
@@ -107,19 +104,25 @@ def score_word(word):
 
     # initialize num of points
     num_of_points = 0
+    # check case sensitivity
     refined_word = word.upper()
 
+    # add bonus points
     if len(refined_word) == 7 or len(refined_word) == 8 or len(refined_word) == 9 or len(refined_word) == 10:
         num_of_points += 8
     else:
         num_of_points += 0
+
+    # update points based on chart
     for i in refined_word:
             num_of_points += score_chart[i]
 
     return(num_of_points)
 
+# ----- WAVE 4 -----
+'''
 
-
+'''
 
 def get_highest_word_score(word_list):
     pass
