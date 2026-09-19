@@ -1,4 +1,5 @@
 from random import randint
+
 '''
 ANAGRAM
 a word or phrase formed by rearranging the letters of a different word or phrase.
@@ -6,11 +7,14 @@ a player is given a random set of letters and must make an anagram using those l
 Each submitted word will score points.
 Do not use sample, choice, or select, or max
 '''
+
 # ----- WAVE 1 -----
 '''
 build a hand of 10 letters for the user.
 array of 10 strings, 1 letter, random, based on table
 '''
+
+
 # letters and frequency provided
 distribution_of_letters = {
     "A" : 9, "N" : 6, "B" : 2, "O" : 8,
@@ -42,6 +46,7 @@ def draw_letters():
     while len(hand) < 10:
 
         random_num = randint(0,len(master_letter_list)-1)
+
         # dont use a previous index
         if random_num not in ints_used:
             hand.append(master_letter_list[random_num])
@@ -49,22 +54,49 @@ def draw_letters():
         else:
             continue
 
-
     return(hand)
 
 
 
 
 
-
+# ----- WAVE 2 -----
+'''
+Check if word given only uses chars from hand letter_bank
+returns T or F
+'''
+# check input word uses available char's
 def uses_available_letters(word, letter_bank):
-    pass
+    # create a new modifiable list
+    letter_bank_copy = letter_bank[:]
+    # initialize function
+    used_right_letters = False
+    # account for case sensitivity
+    refined_word = word.upper()
+
+    # loop through word and check if it's in letter bank
+    for i in refined_word:
+        if i in letter_bank_copy:
+            letter_bank_copy.remove(i)
+            used_right_letters = True
+        #not in letter_bank return false
+        else:
+            used_right_letters = False
+            break
+
+    return(used_right_letters)
 
 
+# ----- WAVE 3 -----
+'''
+
+'''
+# return score of a word
 def score_word(word):
     pass
+
+
 
 def get_highest_word_score(word_list):
     pass
 
-draw_letters()
