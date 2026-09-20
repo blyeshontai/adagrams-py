@@ -51,8 +51,6 @@ def draw_letters():
         if random_num not in ints_used:
             hand.append(master_letter_list[random_num])
             ints_used.append(random_num)
-        else:
-            continue
 
     return(hand)
 
@@ -121,8 +119,51 @@ def score_word(word):
 
 # ----- WAVE 4 -----
 '''
-
+Looks at a word list and calculates which word has the highest score.
+Returns winning word tuple(word, score)
+Tie breaking logic
+    *winning_word = word with fewest letters
+    *unless the word has 10 letters
+    *if same score and same length, pick the first one in list.
 '''
 
 def get_highest_word_score(word_list):
-    pass
+
+    # function to handle tie breakers
+    def tie_breaker(new_word, current_winner):
+        if len(new_word) == len(current_winner):
+            return current_winner
+        elif len(new_word) == 10 and len(current_winner) != 10:
+            return new_word
+        elif len(current_winner) == 10 and len(new_word) != 10:
+            return current_winner
+        elif len(new_word) > len(current_winner):
+            return current_winner
+        else:
+            return new_word
+
+    # arrange list of words and scores
+    words_and_score_dict = {}
+
+    # initialize winning variables
+    winning_word = ""
+    winning_score = 0
+
+    # create dictionary for words and scores
+    for word in word_list:
+        words_and_score_dict[word] = score_word(word)
+
+    # loop through dict compairing scores and updating winners
+    for i in words_and_score_dict:
+        if words_and_score_dict[i] > winning_score:
+            winning_score = words_and_score_dict[i]
+            winning_word = i
+        elif words_and_score_dict[i] == winning_score:
+            pick_this_one = tie_breaker(i, winning_word)
+            winning_score = score_word(pick_this_one)
+            winning_word = pick_this_one
+
+    # establish final winners
+    winners = winning_word, winning_score
+
+    return winners
